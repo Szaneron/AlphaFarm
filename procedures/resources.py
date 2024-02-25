@@ -209,7 +209,7 @@ def restore_health():
     pyautogui.click()
     time.sleep(0.1)
     pyautogui.press('p')
-    time.sleep(2.5)
+    time.sleep(2)
 
 
 def restore_mana():
@@ -224,7 +224,7 @@ def restore_mana():
     pyautogui.click()
     time.sleep(0.1)
     pyautogui.press('p')
-    time.sleep(2.5)
+    time.sleep(2)
 
 
 def check_resources_in_boss_instance(enemy_name):
@@ -401,7 +401,7 @@ def remove_grey_wolf_skin_from_inventory():
 
     if skin_find:
         # Throw operation
-        time.sleep(1)
+        time.sleep(0.2)
         pyautogui.mouseDown()
         pyautogui.moveTo(180, 550, duration=0.25)
         pyautogui.mouseUp()
@@ -433,7 +433,7 @@ def remove_burning_moonshine_from_inventory():
 
     if burning_moonshine_find:
         # Throw operation
-        time.sleep(1)
+        time.sleep(0.2)
         pyautogui.mouseDown()
         pyautogui.moveTo(180, 550, duration=0.25)
         pyautogui.mouseUp()

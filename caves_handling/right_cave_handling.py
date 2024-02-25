@@ -50,7 +50,7 @@ def right_cave_path():
             elif checkpoint == 'boss checkpoint':
                 move_to_checkpoint(boss_checkpoint[0], boss_checkpoint[1], 0.7, 150, 120)
 
-            time.sleep(4)
+            time.sleep(2.5)
             in_combat = check_if_in_combat()
 
             if in_combat:
@@ -79,7 +79,7 @@ def right_cave_path():
             resting_place_found = move_to_resting_area()
             if resting_place_found:
                 break
-            time.sleep(6.5)
+            time.sleep(5)
 
         time.sleep(4)
         in_combat = check_if_in_combat()
@@ -90,7 +90,7 @@ def right_cave_path():
             print(f'The player has reached the resting area')
             break
 
-    print('River cave route ended')
+    print('Right cave route ended')
     return health_potions_used, mana_potions_used, potions_error_occurs
 
 
@@ -127,7 +127,7 @@ def back_to_cave_enter_from_boss(fifth_checkpoint, fourth_checkpoint, third_chec
             elif checkpoint == 'exit checkpoint':
                 move_to_checkpoint(exit_checkpoint[0], exit_checkpoint[1], 0.7, 300, 150)
 
-            time.sleep(3)
+            time.sleep(2)
             in_combat = check_if_in_combat()
 
             if in_combat:
@@ -136,5 +136,3 @@ def back_to_cave_enter_from_boss(fifth_checkpoint, fourth_checkpoint, third_chec
             elif not in_combat:
                 print(f'The player has reached the {checkpoint}')
                 break
-
-    time.sleep(2)

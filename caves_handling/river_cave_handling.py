@@ -41,7 +41,7 @@ def river_cave_path():
             elif checkpoint == 'boss checkpoint':
                 move_to_checkpoint(boss_checkpoint[0], boss_checkpoint[1], 0.6, 0, 70)
 
-            time.sleep(4)
+            time.sleep(2.5)
             in_combat = check_if_in_combat()
 
             if in_combat:
@@ -117,5 +117,3 @@ def back_to_cave_enter_from_boss(third_checkpoint, second_checkpoint, first_chec
             elif not in_combat:
                 print(f'The player has reached the {checkpoint}')
                 break
-
-    time.sleep(2)

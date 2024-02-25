@@ -33,7 +33,6 @@ start_time = time.time()
 
 try:
     for approach in range(1, 31):
-        time.sleep(2)
         ready_to_go, health_potions, mana_potions, potions_error = check_if_ready_to_go()
         HEALTH_POTIONS_USED += health_potions
         MANA_POTIONS_USED += mana_potions
@@ -48,7 +47,7 @@ try:
         while True:
             entrance_to_the_cave = enter_alpha_cave()
             if entrance_to_the_cave:
-                time.sleep(7)
+                time.sleep(6)
                 in_combat = check_if_in_combat()
 
                 if in_combat:
@@ -88,8 +87,6 @@ try:
         print(f"Time of approach number {approach}: {int(minutes)} min, {int(seconds)} sec")
         print()
 
-        time.sleep(15)
-
 except Exception as e:
     print(f"Exception occurred: {e}")
 
@@ -101,4 +98,4 @@ finally:
     print(f"Total working time: {int(total_minutes)} min, {int(total_seconds)} sec")
     print("The program has been terminated")
 
-    input("Naciśnij Enter, aby zakończyć program.")
+    input("Press enter to leave.")

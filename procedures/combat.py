@@ -115,7 +115,7 @@ def combat_with_enemy(enemy_name):
 
         while combat_in_progress:
             result = check_if_still_in_combat()
-            print('In combat:', result)
+            pyautogui.press(' ')
 
             if not result:
                 print('End of combat')
@@ -123,7 +123,7 @@ def combat_with_enemy(enemy_name):
 
             time.sleep(3)
 
-        time.sleep(2)
+        time.sleep(1)
         pyautogui.press('esc')
 
     elif enemy_name == 'Alpha':
@@ -135,7 +135,7 @@ def combat_with_enemy(enemy_name):
 
         while combat_in_progress:
             result = check_if_still_in_combat()
-            print('In combat:', result)
+            pyautogui.press(' ')
 
             if not result:
                 print('End of combat')
@@ -143,7 +143,7 @@ def combat_with_enemy(enemy_name):
 
             time.sleep(3)
 
-        time.sleep(2)
+        time.sleep(1)
         pyautogui.press('esc')
 
     elif enemy_name == 'Kold':
@@ -153,7 +153,7 @@ def combat_with_enemy(enemy_name):
 
         while combat_in_progress:
             result = check_if_still_in_combat()
-            print('In combat:', result)
+            pyautogui.press(' ')
 
             if not result:
                 print('End of combat')
@@ -161,7 +161,7 @@ def combat_with_enemy(enemy_name):
 
             time.sleep(3)
 
-        time.sleep(2)
+        time.sleep(1)
         pyautogui.press('esc')
 
 
