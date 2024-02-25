@@ -22,7 +22,7 @@ def read_resources():
     - Only digits are extracted using regular expressions to get cleaner numeric information.
     """
 
-    def unsharp_mask(image, sigma=2, strength=1.2):
+    def unsharp_mask(image, sigma=1.0, strength=1.5):
         blurred = cv2.GaussianBlur(image, (0, 0), sigma)
         sharpened = cv2.addWeighted(image, 1.0 + strength, blurred, -strength, 0)
         return sharpened
@@ -58,6 +58,9 @@ def read_resources():
 
     # Read text from the processed image using pytesseract
     text = pytesseract.image_to_string(morph_image)
+
+    cv2.imwrite('resources.png', morph_image)
+    print(text)
 
     # Check if the euro sign appears in the text
     if '€' in text:

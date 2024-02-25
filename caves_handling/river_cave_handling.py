@@ -41,7 +41,7 @@ def river_cave_path():
             elif checkpoint == 'boss checkpoint':
                 move_to_checkpoint(boss_checkpoint[0], boss_checkpoint[1], 0.6, 0, 70)
 
-            time.sleep(2.5)
+            time.sleep(3)
             in_combat = check_if_in_combat()
 
             if in_combat:

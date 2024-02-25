@@ -27,7 +27,7 @@ def show_global_info():
     print('POTIONS ERROR:', POTIONS_ERROR_OCCURS)
     print('--------------------------')
 
-
+time.sleep(2)
 # Start time of the program
 start_time = time.time()
 
