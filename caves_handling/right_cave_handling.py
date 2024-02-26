@@ -50,7 +50,7 @@ def right_cave_path():
             elif checkpoint == 'boss checkpoint':
                 move_to_checkpoint(boss_checkpoint[0], boss_checkpoint[1], 0.7, 150, 120)
 
-            time.sleep(2.5)
+            time.sleep(3)
             in_combat = check_if_in_combat()
 
             if in_combat:
@@ -127,7 +127,7 @@ def back_to_cave_enter_from_boss(fifth_checkpoint, fourth_checkpoint, third_chec
             elif checkpoint == 'exit checkpoint':
                 move_to_checkpoint(exit_checkpoint[0], exit_checkpoint[1], 0.7, 300, 150)
 
-            time.sleep(2)
+            time.sleep(1.5)
             in_combat = check_if_in_combat()
 
             if in_combat:

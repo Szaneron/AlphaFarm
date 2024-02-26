@@ -121,7 +121,7 @@ def combat_with_enemy(enemy_name):
                 print('End of combat')
                 break
 
-            time.sleep(3)
+            time.sleep(2)
 
         time.sleep(1)
         pyautogui.press('esc')
@@ -141,7 +141,7 @@ def combat_with_enemy(enemy_name):
                 print('End of combat')
                 break
 
-            time.sleep(3)
+            time.sleep(2)
 
         time.sleep(1)
         pyautogui.press('esc')
@@ -159,7 +159,7 @@ def combat_with_enemy(enemy_name):
                 print('End of combat')
                 break
 
-            time.sleep(3)
+            time.sleep(2)
 
         time.sleep(1)
         pyautogui.press('esc')

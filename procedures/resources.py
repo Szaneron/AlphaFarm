@@ -9,23 +9,27 @@ pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesse
 
 
 def read_resources():
-    """
-    Takes a screenshot of a specified region, processes the image to extract resource information,
-    and returns the detected text.
-
-    Returns:
-    - A string containing the detected resource information.
-
-    Notes:
-    - The function uses pytesseract to extract text from the processed image.
-    - If the euro sign ('€') is detected, it is replaced with the number 6.
-    - Only digits are extracted using regular expressions to get cleaner numeric information.
-    """
-
-    def unsharp_mask(image, sigma=1.0, strength=1.5):
+    def unsharp_mask(image, sigma=2, strength=1.2):
         blurred = cv2.GaussianBlur(image, (0, 0), sigma)
         sharpened = cv2.addWeighted(image, 1.0 + strength, blurred, -strength, 0)
         return sharpened
+
+    def preprocess_image(image):
+        # Apply Unsharp Mask to sharpen edges
+        sharpened_image = unsharp_mask(image)
+
+        # Apply Bilateral Filter for edge-preserving smoothing
+        bilateral_filtered = cv2.bilateralFilter(sharpened_image, d=8, sigmaColor=85, sigmaSpace=85)
+
+        # Apply Global Thresholding
+        _, binary_image = cv2.threshold(bilateral_filtered, 200, 255, cv2.THRESH_BINARY)
+
+        # Apply Morphological Operations (Dilation followed by Erosion)
+        kernel = np.ones((3, 3), np.uint8)
+        morph_image = cv2.dilate(binary_image, kernel, iterations=1)
+        morph_image = cv2.erode(morph_image, kernel, iterations=1)
+
+        return morph_image
 
     # Take a screenshot
     screenshot = pyautogui.screenshot()
@@ -43,23 +47,15 @@ def read_resources():
     grayscale_image = cv2.cvtColor(cropped_screenshot, cv2.COLOR_BGR2GRAY)
 
     # Resize the image (optional, adjust the size as needed)
-    resized_image = cv2.resize(grayscale_image, None, fx=5, fy=5)
+    resized_image = cv2.resize(grayscale_image, None, fx=4.5, fy=4.5)
 
-    # Apply Unsharp Mask to sharpen edges
-    sharpened_image = unsharp_mask(resized_image)
-
-    # Apply Global Thresholding
-    _, binary_image = cv2.threshold(sharpened_image, 200, 255, cv2.THRESH_BINARY)
-
-    # Apply Morphological Operations (Dilation followed by Erosion)
-    kernel = np.ones((3, 3), np.uint8)
-    morph_image = cv2.dilate(binary_image, kernel, iterations=1)
-    morph_image = cv2.erode(morph_image, kernel, iterations=1)
+    # Preprocess the image
+    processed_image = preprocess_image(resized_image)
 
     # Read text from the processed image using pytesseract
-    text = pytesseract.image_to_string(morph_image)
+    text = pytesseract.image_to_string(processed_image)
 
-    cv2.imwrite('resources.png', morph_image)
+    cv2.imwrite('resources.png', processed_image)
     print(text)
 
     # Check if the euro sign appears in the text
@@ -172,12 +168,12 @@ def check_resources_in_resting_place():
         if resources_dict['current_health'] > resources_dict['max_health'] or resources_dict['current_mana'] > \
                 resources_dict['max_mana']:
             if resources_dict['current_health'] > resources_dict['max_health']:
-                print('Resources read error handling...')
+                print('***Resources read health error handling...')
                 restore_health()
                 health_potions_used += 1
                 number_of_repairs += 1
             elif resources_dict['current_mana'] > resources_dict['max_mana']:
-                print('Resources read error handling...')
+                print('***Resources read mana error handling...')
                 restore_mana()
                 mana_potions_used += 1
                 number_of_repairs += 1
@@ -190,12 +186,12 @@ def check_resources_in_resting_place():
 
     else:
         if number_of_repairs < 2:
-            print('Resources read error handling...')
+            print('***Resources read error handling...')
             restore_mana()
             number_of_repairs += 1
 
         else:
-            print('Resources read error handling reach max number of repairs in a single call!!!')
+            print('!!!***Resources read error handling reach max number of repairs in a single call!!!')
 
     return full_resources, health_potions_used, mana_potions_used, number_of_repairs
 

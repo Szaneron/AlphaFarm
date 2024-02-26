@@ -92,8 +92,6 @@ def enter_alpha_cave():
         # Hover over the center of the found area
         pyautogui.moveTo(match_x + w // 2, match_y + h // 2, duration=0.25)
 
-        # Wait and click
-        time.sleep(1)
         pyautogui.rightClick()
 
         return True
@@ -142,8 +140,6 @@ def move_to_checkpoint(checkpoint_name, template_path, threshold, x_offset, y_of
         # Hover over the center of the found area
         pyautogui.moveTo(match_x + w - x_offset // 2, match_y + h - y_offset // 2, duration=0.25)
 
-        # Wait and click
-        time.sleep(1)
         if checkpoint_name == "Exit checkpoint":
             pyautogui.rightClick()
         else:
@@ -178,7 +174,7 @@ def move_to_resting_area():
     result = cv2.matchTemplate(screenshot_gray, template, cv2.TM_CCOEFF_NORMED)
 
     # Set the match threshold
-    threshold = 0.7
+    threshold = 0.8
 
     # Check if the maximum match exceeds the threshold
     min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
@@ -196,8 +192,6 @@ def move_to_resting_area():
         # Hover over the center of the found area
         pyautogui.moveTo(match_x + w - x_offset // 2, match_y + h - y_offset // 2, duration=0.25)
 
-        # Wait and click
-        time.sleep(1)
         pyautogui.click()
         return True
     else:
