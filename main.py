@@ -1,5 +1,3 @@
-import os
-import sys
 import time
 from procedures.actions import enter_alpha_cave, check_cave
 from procedures.combat import check_if_in_combat, combat_handling
@@ -27,16 +25,15 @@ def show_global_info():
     print('POTIONS ERROR:', POTIONS_ERROR_OCCURS)
     print('--------------------------')
 
+
 time.sleep(2)
+
 # Start time of the program
 start_time = time.time()
 
 try:
     for approach in range(1, 31):
-        ready_to_go, health_potions, mana_potions, potions_error = check_if_ready_to_go()
-        HEALTH_POTIONS_USED += health_potions
-        MANA_POTIONS_USED += mana_potions
-        POTIONS_ERROR_OCCURS += potions_error
+        check_if_ready_to_go()
 
         start_loop_time = time.time()
 

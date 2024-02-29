@@ -1,3 +1,4 @@
+import sys
 import time
 import cv2
 import numpy as np
@@ -9,20 +10,49 @@ pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesse
 
 
 def read_resources():
-    def unsharp_mask(image, sigma=2, strength=1.2):
+    """
+    Captures a screenshot, extracts a specific region, processes the image, and reads text using pytesseract.
+
+    Returns:
+    str: Extracted and processed text containing numeric information, potentially with the euro sign replaced with '6'.
+    """
+
+    def unsharp_mask(image, sigma=2, strength=1.8):
+        """
+        Applies unsharp mask to enhance edges in an image.
+
+        Parameters:
+        image (numpy.ndarray): Input image.
+        sigma (int, optional): Standard deviation for Gaussian blur. Default is 2.
+        strength (float, optional): Strength of the sharpening effect. Default is 1.8.
+
+        Returns:
+        numpy.ndarray: Sharpened image.
+        """
+
         blurred = cv2.GaussianBlur(image, (0, 0), sigma)
         sharpened = cv2.addWeighted(image, 1.0 + strength, blurred, -strength, 0)
         return sharpened
 
     def preprocess_image(image):
+        """
+        Applies a series of image processing techniques to enhance text extraction.
+
+        Parameters:
+        image (numpy.ndarray): Input image.
+
+        Returns:
+        numpy.ndarray: Processed image ready for text extraction.
+        """
+
         # Apply Unsharp Mask to sharpen edges
         sharpened_image = unsharp_mask(image)
 
         # Apply Bilateral Filter for edge-preserving smoothing
-        bilateral_filtered = cv2.bilateralFilter(sharpened_image, d=8, sigmaColor=85, sigmaSpace=85)
+        bilateral_filtered = cv2.bilateralFilter(sharpened_image, d=9, sigmaColor=80, sigmaSpace=80)
 
         # Apply Global Thresholding
-        _, binary_image = cv2.threshold(bilateral_filtered, 200, 255, cv2.THRESH_BINARY)
+        _, binary_image = cv2.threshold(bilateral_filtered, 195, 255, cv2.THRESH_BINARY)
 
         # Apply Morphological Operations (Dilation followed by Erosion)
         kernel = np.ones((3, 3), np.uint8)
@@ -120,22 +150,13 @@ def check_if_ready_to_go():
 
     Returns:
     - ready_to_go: True if the character is ready to go, False otherwise.
-    - health_potions_used: Number of health potions used (integer).
-    - mana_potions_used: Number of mana potions used (integer).
-    - number_of_repairs: Number of repairs needed (integer).
     """
 
     ready_to_go = False
-    number_of_repairs = 0
-    health_potions_used = 0
-    mana_potions_used = 0
 
     while not ready_to_go:
-        full_resources, health_potions, mana_potions, potions_error = check_resources_in_resting_place()
+        full_resources = check_resources_in_resting_place()
         if full_resources:
-            health_potions_used += health_potions
-            mana_potions_used += mana_potions
-            number_of_repairs += potions_error
             print('Ready to go'),
             ready_to_go = True
         else:
@@ -143,7 +164,7 @@ def check_if_ready_to_go():
             pyautogui.press('r')
             time.sleep(30)
 
-    return ready_to_go, health_potions_used, mana_potions_used, number_of_repairs
+    return ready_to_go
 
 
 def check_resources_in_resting_place():
@@ -152,15 +173,9 @@ def check_resources_in_resting_place():
 
     Returns:
     - full_resources: True if all resources are full, False otherwise.
-    - health_potions_used: Number of health potions used during error handling (integer).
-    - mana_potions_used: Number of mana potions used during error handling (integer).
-    - number_of_repairs: Number of repairs needed during error handling (integer).
     """
 
     full_resources = False
-    number_of_repairs = 0
-    health_potions_used = 0
-    mana_potions_used = 0
 
     resources_dict = get_resources()
     is_dictionary_empty = all(value == 0 for value in resources_dict.values())
@@ -168,15 +183,16 @@ def check_resources_in_resting_place():
         if resources_dict['current_health'] > resources_dict['max_health'] or resources_dict['current_mana'] > \
                 resources_dict['max_mana']:
             if resources_dict['current_health'] > resources_dict['max_health']:
-                print('***Resources read health error handling...')
-                restore_health()
-                health_potions_used += 1
-                number_of_repairs += 1
+                print('***Resources read health error handling in resting place...')
+                pyautogui.press('r')
+                time.sleep(30)
+                full_resources = True
+
             elif resources_dict['current_mana'] > resources_dict['max_mana']:
-                print('***Resources read mana error handling...')
-                restore_mana()
-                mana_potions_used += 1
-                number_of_repairs += 1
+                print('***Resources read mana error handling in resting place...')
+                pyautogui.press('r')
+                time.sleep(30)
+                full_resources = True
         else:
             if resources_dict['current_health'] == resources_dict['max_health'] and resources_dict[
                 'current_mana'] == resources_dict['max_mana'] and resources_dict['current_stamina'] == \
@@ -185,15 +201,12 @@ def check_resources_in_resting_place():
                 full_resources = True
 
     else:
-        if number_of_repairs < 2:
-            print('***Resources read error handling...')
-            restore_mana()
-            number_of_repairs += 1
+        print('***Resources read dictionary error handling in resting place...')
+        pyautogui.press('r')
+        time.sleep(30)
+        full_resources = True
 
-        else:
-            print('!!!***Resources read error handling reach max number of repairs in a single call!!!')
-
-    return full_resources, health_potions_used, mana_potions_used, number_of_repairs
+    return full_resources
 
 
 def restore_health():
@@ -219,7 +232,7 @@ def restore_mana():
     pyautogui.press('p')
     time.sleep(0.1)
     pyautogui.moveTo(1155, 765, duration=0.25)
-    time.sleep(0.1)
+    time.sleep(5)
     pyautogui.click()
     time.sleep(0.1)
     pyautogui.press('p')
@@ -252,20 +265,20 @@ def check_resources_in_boss_instance(enemy_name):
                 pass
             else:
                 if resources_dict['current_health'] > resources_dict['max_health']:
-                    print('Resources read error handling...')
+                    print('***Resources read health error handling in boss instance...')
                     restore_health()
                     health_potions_used += 1
                     number_of_repairs += 1
                     continue
                 else:
-                    if (resources_dict['current_health']) < 500:
-                        print('HP level less than 500')
+                    if (resources_dict['current_health']) < 600:
+                        print('HEALTH level less than 600')
                         restore_health()
                         health_potions_used += 1
                         continue
 
                 if resources_dict['current_mana'] > resources_dict['max_mana']:
-                    print('Resources read error handling...')
+                    print('***Resources read mana error handling in boss instance...')
                     restore_mana()
                     mana_potions_used += 1
                     number_of_repairs += 1
@@ -279,13 +292,14 @@ def check_resources_in_boss_instance(enemy_name):
             break
         else:
             if number_of_repairs < 2:
-                print('Resources read error handling...')
+                print('***Resources read dictionary error handling in boss instance...')
                 restore_mana()
                 mana_potions_used += 1
                 number_of_repairs += 1
                 continue
             else:
                 print('Resources read error handling reach max number of repairs in a single call!!!')
+                sys.exit('Resources read error handling reach max number of repairs in a single call!!!')
 
     return health_potions_used, mana_potions_used, number_of_repairs
 
