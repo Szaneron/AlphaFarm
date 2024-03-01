@@ -4,7 +4,9 @@ import pyautogui
 import pytesseract
 import time
 
-pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
+from settings import pytesseract_path
+
+pytesseract.pytesseract.tesseract_cmd = pytesseract_path
 
 
 def check_if_in_combat():
