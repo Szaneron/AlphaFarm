@@ -2,15 +2,16 @@ from procedures.actions import move_to_checkpoint
 from procedures.actions import move_to_resting_area
 from procedures.resources import check_resources_in_boss_instance, remove_grey_wolf_skin_from_inventory
 from procedures.combat import check_if_in_combat, combat_handling
+from settings import resource_path
 import time
 
-first_checkpoint = ['First checkpoint', 'templates/canyon_cave/exit_checkpoint.PNG']
-second_checkpoint = ['Second checkpoint', 'templates/canyon_cave/second_checkpoint.PNG']
-third_checkpoint = ['Third checkpoint', 'templates/canyon_cave/third_checkpoint.PNG']
-fourth_checkpoint = ['Fourth checkpoint', 'templates/canyon_cave/fourth_checkpoint.PNG']
-fifth_checkpoint = ['Fifth checkpoint', 'templates/canyon_cave/fifth_checkpoint.PNG']
-boss_checkpoint = ['Boss checkpoint', 'templates/canyon_cave/boss_checkpoint.PNG']
-exit_checkpoint = ['Exit checkpoint', 'templates/canyon_cave/exit_checkpoint.PNG']
+first_checkpoint = ['First checkpoint', resource_path('templates/canyon_cave/exit_checkpoint.PNG')]
+second_checkpoint = ['Second checkpoint', resource_path('templates/canyon_cave/second_checkpoint.PNG')]
+third_checkpoint = ['Third checkpoint', resource_path('templates/canyon_cave/third_checkpoint.PNG')]
+fourth_checkpoint = ['Fourth checkpoint', resource_path('templates/canyon_cave/fourth_checkpoint.PNG')]
+fifth_checkpoint = ['Fifth checkpoint', resource_path('templates/canyon_cave/fifth_checkpoint.PNG')]
+boss_checkpoint = ['Boss checkpoint', resource_path('templates/canyon_cave/boss_checkpoint.PNG')]
+exit_checkpoint = ['Exit checkpoint', resource_path('templates/canyon_cave/exit_checkpoint.PNG')]
 
 
 def canyon_cave_path():

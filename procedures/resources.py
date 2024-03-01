@@ -6,7 +6,7 @@ import pyautogui
 import pytesseract
 import re
 
-from settings import pytesseract_path
+from settings import pytesseract_path, resource_path
 
 pytesseract.pytesseract.tesseract_cmd = pytesseract_path
 
@@ -312,7 +312,7 @@ def find_grey_wolf_skin_in_inventory():
     """
 
     # Template path
-    template_path = 'templates/equipment/grey_wolves_skin.PNG'
+    template_path = resource_path('templates/equipment/grey_wolves_skin.PNG')
 
     # Take a screenshot
     screenshot = pyautogui.screenshot()
@@ -360,7 +360,7 @@ def find_burning_moonshine_in_inventory():
     """
 
     # Template path
-    template_path = 'templates/equipment/burning_moonshine.PNG'
+    template_path = resource_path('templates/equipment/burning_moonshine.PNG')
 
     # Take a screenshot
     screenshot = pyautogui.screenshot()

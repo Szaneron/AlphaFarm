@@ -1,7 +1,8 @@
-import time
 import cv2
 import pyautogui
 import numpy as np
+
+from settings import resource_path
 
 
 def check_cave():
@@ -17,9 +18,9 @@ def check_cave():
     screenshot = np.array(screenshot)
 
     img_screen = cv2.cvtColor(screenshot, cv2.COLOR_BGR2GRAY)
-    img_river_cave = cv2.imread('templates/caves/river_cave.PNG', cv2.IMREAD_GRAYSCALE)
-    img_canyon_cave = cv2.imread('templates/caves/canyon_cave.PNG', cv2.IMREAD_GRAYSCALE)
-    img_right_cave = cv2.imread('templates/caves/right_cave.PNG', cv2.IMREAD_GRAYSCALE)
+    img_river_cave = cv2.imread(resource_path('templates/caves/river_cave.PNG'), cv2.IMREAD_GRAYSCALE)
+    img_canyon_cave = cv2.imread(resource_path('templates/caves/canyon_cave.PNG'), cv2.IMREAD_GRAYSCALE)
+    img_right_cave = cv2.imread(resource_path('templates/caves/right_cave.PNG'), cv2.IMREAD_GRAYSCALE)
 
     def compare_images(template, target, threshold=0.8):
         result = cv2.matchTemplate(target, template, cv2.TM_CCOEFF_NORMED)
@@ -63,7 +64,7 @@ def enter_alpha_cave():
     """
 
     # Default file paths
-    template_path = 'templates/entrance_to_the_cave/cave_entrance.PNG'
+    template_path = resource_path('templates/entrance_to_the_cave/cave_entrance.PNG')
 
     # Take a screenshot
     screenshot = pyautogui.screenshot()
@@ -158,7 +159,7 @@ def move_to_resting_area():
     """
 
     # Default file paths
-    template_path = 'templates/entrance_to_the_cave/resting_place.PNG'
+    template_path = resource_path('templates/entrance_to_the_cave/resting_place.PNG')
 
     # Take a screenshot
     screenshot = pyautogui.screenshot()
