@@ -78,8 +78,6 @@ def check_enemy_name():
     # Apply Unsharp Mask to sharpen edges
     sharpened_image = unsharp_mask(resized_image)
 
-    # cv2.imwrite('new.png', sharpened_image)
-
     # Apply Global Thresholding
     _, binary_image = cv2.threshold(sharpened_image, 200, 255, cv2.THRESH_BINARY)
 

@@ -17,7 +17,7 @@ def read_resources():
     str: Extracted and processed text containing numeric information, potentially with the euro sign replaced with '6'.
     """
 
-    def unsharp_mask(image, sigma=2, strength=1.8):
+    def unsharp_mask(image, sigma=2, strength=1.6):
         """
         Applies unsharp mask to enhance edges in an image.
 
@@ -84,9 +84,6 @@ def read_resources():
 
     # Read text from the processed image using pytesseract
     text = pytesseract.image_to_string(processed_image)
-
-    cv2.imwrite('resources.png', processed_image)
-    print(text)
 
     # Check if the euro sign appears in the text
     if '€' in text:
@@ -232,7 +229,7 @@ def restore_mana():
     pyautogui.press('p')
     time.sleep(0.1)
     pyautogui.moveTo(1155, 765, duration=0.25)
-    time.sleep(5)
+    time.sleep(0.1)
     pyautogui.click()
     time.sleep(0.1)
     pyautogui.press('p')
