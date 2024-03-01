@@ -175,7 +175,7 @@ def move_to_resting_area():
     result = cv2.matchTemplate(screenshot_gray, template, cv2.TM_CCOEFF_NORMED)
 
     # Set the match threshold
-    threshold = 0.8
+    threshold = 0.7
 
     # Check if the maximum match exceeds the threshold
     min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)

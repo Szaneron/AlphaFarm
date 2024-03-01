@@ -119,6 +119,7 @@ def combat_with_enemy(enemy_name):
 
             if not result:
                 print('End of combat')
+                print('')
                 break
 
             time.sleep(2)
@@ -139,6 +140,7 @@ def combat_with_enemy(enemy_name):
 
             if not result:
                 print('End of combat')
+                print('')
                 break
 
             time.sleep(2)
@@ -157,6 +159,7 @@ def combat_with_enemy(enemy_name):
 
             if not result:
                 print('End of combat')
+                print('')
                 break
 
             time.sleep(2)
