@@ -47,7 +47,7 @@ def right_cave_path():
             elif checkpoint == 'fourth checkpoint':
                 move_to_checkpoint(fourth_checkpoint[0], fourth_checkpoint[1], 0.7, 130, 150)
             elif checkpoint == 'fifth checkpoint':
-                move_to_checkpoint(fifth_checkpoint[0], fifth_checkpoint[1], 0.7, 90, 40)
+                move_to_checkpoint(fifth_checkpoint[0], fifth_checkpoint[1], 0.7, 250, 80)
             elif checkpoint == 'boss checkpoint':
                 move_to_checkpoint(boss_checkpoint[0], boss_checkpoint[1], 0.7, 150, 120)
 
@@ -116,7 +116,7 @@ def back_to_cave_enter_from_boss(fifth_checkpoint, fourth_checkpoint, third_chec
     for checkpoint in checkpoint_list:
         while True:
             if checkpoint == 'fifth checkpoint':
-                move_to_checkpoint(fifth_checkpoint[0], fifth_checkpoint[1], 0.7, 90, 40)
+                move_to_checkpoint(fifth_checkpoint[0], fifth_checkpoint[1], 0.7, 250, 80)
             elif checkpoint == 'fourth checkpoint':
                 move_to_checkpoint(fourth_checkpoint[0], fourth_checkpoint[1], 0.7, 130, 150)
             elif checkpoint == 'third checkpoint':

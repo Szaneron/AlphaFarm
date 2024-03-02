@@ -36,7 +36,7 @@ def river_cave_path():
             if checkpoint == 'first checkpoint':
                 move_to_checkpoint(first_checkpoint[0], first_checkpoint[1], 0.6, 430, 170)
             elif checkpoint == 'second checkpoint':
-                move_to_checkpoint(second_checkpoint[0], second_checkpoint[1], 0.6, 0, 130)
+                move_to_checkpoint(second_checkpoint[0], second_checkpoint[1], 0.6, 50, 140)
             elif checkpoint == 'third checkpoint':
                 move_to_checkpoint(third_checkpoint[0], third_checkpoint[1], 0.6, 0, 0)
             elif checkpoint == 'boss checkpoint':
@@ -103,7 +103,7 @@ def back_to_cave_enter_from_boss(third_checkpoint, second_checkpoint, first_chec
             if checkpoint == 'third checkpoint':
                 move_to_checkpoint(third_checkpoint[0], third_checkpoint[1], 0.6, 0, 0)
             elif checkpoint == 'second checkpoint':
-                move_to_checkpoint(second_checkpoint[0], second_checkpoint[1], 0.6, 0, 130)
+                move_to_checkpoint(second_checkpoint[0], second_checkpoint[1], 0.6, 50, 140)
             elif checkpoint == 'first checkpoint':
                 move_to_checkpoint(first_checkpoint[0], first_checkpoint[1], 0.6, 430, 170)
             elif checkpoint == 'exit checkpoint':
