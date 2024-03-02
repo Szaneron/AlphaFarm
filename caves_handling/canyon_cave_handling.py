@@ -40,7 +40,7 @@ def canyon_cave_path():
             if checkpoint == 'first checkpoint':
                 move_to_checkpoint(first_checkpoint[0], first_checkpoint[1], 0.7, 190, 210)
             elif checkpoint == 'second checkpoint':
-                move_to_checkpoint(second_checkpoint[0], second_checkpoint[1], 0.7, 120, 150)
+                move_to_checkpoint(second_checkpoint[0], second_checkpoint[1], 0.7, 130, 170)
             elif checkpoint == 'third checkpoint':
                 move_to_checkpoint(third_checkpoint[0], third_checkpoint[1], 0.7, 120, 130)
             elif checkpoint == 'fourth checkpoint':

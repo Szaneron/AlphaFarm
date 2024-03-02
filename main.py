@@ -1,5 +1,5 @@
 import time
-from procedures.actions import enter_alpha_cave, check_cave
+from procedures.actions import enter_alpha_cave, check_cave, move_to_resting_area
 from procedures.combat import check_if_in_combat, combat_handling
 from caves_handling.right_cave_handling import right_cave_path
 from caves_handling.river_cave_handling import river_cave_path
@@ -33,27 +33,27 @@ start_time = time.time()
 
 try:
     for approach in range(1, 31):
-        check_if_ready_to_go()
-
+        # check_if_ready_to_go()
+        #
         start_loop_time = time.time()
+        #
+        # print('--------------------------')
+        # print('APPROACH NUMBER:', approach)
+        # print('--------------------------')
+        #
+        # while True:
+        #     entrance_to_the_cave = enter_alpha_cave()
+        #     if entrance_to_the_cave:
+        #         time.sleep(6)
+        #         in_combat = check_if_in_combat()
+        #
+        #         if in_combat:
+        #             enemy_name = combat_handling()
+        #         elif not in_combat:
+        #             print(f'The player has reached the entrance')
+        #             break
 
-        print('--------------------------')
-        print('APPROACH NUMBER:', approach)
-        print('--------------------------')
-
-        while True:
-            entrance_to_the_cave = enter_alpha_cave()
-            if entrance_to_the_cave:
-                time.sleep(6)
-                in_combat = check_if_in_combat()
-
-                if in_combat:
-                    enemy_name = combat_handling()
-                elif not in_combat:
-                    print(f'The player has reached the entrance')
-                    break
-
-        current_cave = check_cave()
+        current_cave = 'canyon_cave'
 
         print('Current cave:', current_cave)
         match current_cave:
