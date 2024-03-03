@@ -20,6 +20,7 @@ Broken Ranks is a Polish production - the successor to The Pride of Taern. This 
 - The script prints all executed actions in the console, which makes it possible to observe its correct operation and to find a potential error.
 - The script is designed for a resolution of 1920x1080, it will not work properly on any other resolution.
 - Additionally, the game must be in windowed mode, not fullscreen mode. To achieve this, just click f11 in the game.
+- Combat is handled by selecting tactics. The code uses tactics buttons 4 and 2. I have personally set the clock confirmation under the space bar and this setting is also used by the program.
 - The game window must be maximized to the entire screen.
 - The program performs mouse movements and clicks, reads the player's position and controls various situations, it is not recommended to use the mouse or keyboard for your own purposes.
 - The game window cannot be covered with anything.
